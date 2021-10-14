@@ -36,5 +36,4 @@ int main() {
 }
 
 // xpixpix
-// x3.14xpix\0
-// x3.14x3.14x
+// x3.14x3.14x\0
