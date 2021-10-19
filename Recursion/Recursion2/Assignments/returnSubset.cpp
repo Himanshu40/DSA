@@ -35,7 +35,7 @@ int main() {
     int size = subset(input, length, output);
 
     for( int i = 0; i < size; i++) { 
-        for( int j = 0; j <= output[i][0]; j++) { 
+        for( int j = 1; j <= output[i][0]; j++) { 
             cout << output[i][j] << " ";
         }
         cout << endl;
@@ -43,3 +43,24 @@ int main() {
 
     return 0;
 }
+
+// {1, 2}, ""
+
+// (0,0) 0
+// (1,0) 1 (1,1) 1
+// (2,0) 1 (2,1) 2
+// (3,0) 2 (3,1) 1 (3,2) 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
