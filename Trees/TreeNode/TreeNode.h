@@ -9,4 +9,9 @@ class TreeNode {
         vector<TreeNode<T> *> children;
 
         TreeNode(T data) : data {data} {}
+        ~TreeNode() {
+            for (int i {0}; i < children->size(); ++i) {
+                delete children[i];
+            }
+        }
 };

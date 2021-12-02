@@ -107,6 +107,11 @@ void printLevelWise(TreeNode<int>* root) {
 }
 
 int countNodes(TreeNode<int> *root) {
+    // edge case
+    if (!root) {
+        return 0;
+    }
+
     int ans {1};
 
     for (int i {0}; i < root->children.size(); ++i) {
@@ -153,7 +158,6 @@ int getHeight(TreeNode<int>* root) {
     
     for (int i {0}; i < root->children.size(); ++i) {
         int childHeight {getHeight(root->children[i])};
-        std::cout << childHeight << std::endl;
 
         if (childHeight > height) {
             height = childHeight;
@@ -187,9 +191,50 @@ int getLeafNodeCount(TreeNode<int>* root) {
         return 1;
     }
 
+    int count {0};
+    
     for (int i {0}; i < root->children.size(); ++i) {
-        
+        count += getLeafNodeCount(root->children[i]);
     }
+    
+    return count;
+}
+
+// Preorder traversal
+void printPreOrder(TreeNode<int> *root) {
+    if (!root) {
+        return;
+    }
+
+    std::cout << root->data << " ";
+
+    for (int i {0}; i < root->children.size(); ++i) {
+        printPreOrder(root->children[i]);
+    }
+}
+
+// Postorder traversal
+void printPostOrder(TreeNode<int> *root) {
+    if (!root->children.size()) {
+        std::cout << root->data << " ";
+
+        return;
+    }
+
+    for (int i {0}; i < root->children.size(); ++i) {
+        printPostOrder(root->children[i]);
+    }
+
+    std::cout << root->data << " ";
+}
+
+// PostOrder delete
+void deleteTree(TreeNode<int> *root) {
+    for (int i {0}; i < root->children.size(); ++i) {
+        deleteTree(root->children[i]);
+    }
+
+    delete root;
 }
 
 int main() {
@@ -203,14 +248,18 @@ int main() {
     // TreeNode<int> *root {takeInput()};
     // printTree(root);
 
-    TreeNode<int> *root {takeInputLevelWise()};
-    TreeNode<int> *maxNode {root};
-    printLevelWise(root);
+    // TreeNode<int> *root {takeInputLevelWise()};
+    // TreeNode<int> *maxNode {root};
+    // printLevelWise(root);
+    // printPreOrder(root);
+    // printPostOrder(root);
 
     // std::cout << countNodes(root) << std::endl;
     // std::cout << sumOfNodes(root) << std::endl;
     // std::cout << maxNode->data << std::endl;
-    std::cout << getHeight(root) << std::endl;
+    // std::cout << getHeight(root) << std::endl;
+
+    // deleteTree(root);
 
     return 0;
 }
