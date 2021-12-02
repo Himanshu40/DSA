@@ -106,6 +106,92 @@ void printLevelWise(TreeNode<int>* root) {
     }
 }
 
+int countNodes(TreeNode<int> *root) {
+    int ans {1};
+
+    for (int i {0}; i < root->children.size(); ++i) {
+        ans += countNodes(root->children[i]);
+    }
+
+    return ans;
+}
+
+int sumOfNodes(TreeNode<int>* root) {
+    int sum {root->data};
+
+    for (int i {0}; i < root->children.size(); ++i) {
+        sum += sumOfNodes(root->children[i]);
+    }
+
+    return sum;
+}
+
+TreeNode<int>* maxDataNode(TreeNode<int>* root) {
+    std::queue<TreeNode<int> *> pendingNodes;
+    TreeNode<int> *maxNode {root};
+
+    pendingNodes.push(maxNode);
+
+    while (pendingNodes.size()) {
+        TreeNode<int> *front {pendingNodes.front()};
+        pendingNodes.pop();
+
+        for (int i {0}; i < front->children.size(); ++i) {
+            if (maxNode->data < front->children[i]->data) {
+                maxNode = front->children[i];
+            }
+
+            pendingNodes.push(front->children[i]);
+        }
+    }
+
+    return maxNode;
+}
+
+int getHeight(TreeNode<int>* root) {
+    int height {0};
+    
+    for (int i {0}; i < root->children.size(); ++i) {
+        int childHeight {getHeight(root->children[i])};
+        std::cout << childHeight << std::endl;
+
+        if (childHeight > height) {
+            height = childHeight;
+        }
+    }
+
+    return height + 1;
+}
+
+// Depth of a node
+void printAtLevelK(TreeNode<int> *root, int k) {
+    // Edge case
+    if (!root) {
+        return;
+    }
+
+    if (!k) {
+        std::cout << root->data << std::endl;
+
+        return;
+    }
+
+    for (int i {0}; i < root->children.size(); ++i) {
+        printAtLevelK(root->children[i], k - 1);
+    }
+}
+
+// Count leaf nodes
+int getLeafNodeCount(TreeNode<int>* root) {
+    if (!root->children.size()) {
+        return 1;
+    }
+
+    for (int i {0}; i < root->children.size(); ++i) {
+        
+    }
+}
+
 int main() {
     // TreeNode<int> *root {new TreeNode<int>(1)};
     // TreeNode<int> *node1 {new TreeNode<int>(2)};
@@ -118,7 +204,13 @@ int main() {
     // printTree(root);
 
     TreeNode<int> *root {takeInputLevelWise()};
+    TreeNode<int> *maxNode {root};
     printLevelWise(root);
+
+    // std::cout << countNodes(root) << std::endl;
+    // std::cout << sumOfNodes(root) << std::endl;
+    // std::cout << maxNode->data << std::endl;
+    std::cout << getHeight(root) << std::endl;
 
     return 0;
 }
