@@ -24,17 +24,24 @@ TreeNode<int>* getNextLargerElement(TreeNode<int>* root, int x) {
         return root;
     }
     
-    if (root->data > x) {
-        return root;
-    }
+    TreeNode<int> *nextLarger {nullptr};
 
-    TreeNode<int> *store {nullptr};
+    if (root->data > x) {
+        nextLarger = root;
+    }
     
     for (int i {0}; i < root->children.size(); ++i) {
-        store = getNextLargerElement(root->children[i], x);
+        TreeNode<int> *temp {getNextLargerElement(root->children[i], x)};
+    
+        if (!nextLarger) {
+            nextLarger = temp;
+        }
+        else if (temp && temp->data < nextLarger->data) {
+            nextLarger = temp;
+        }
     }
     
-    return store;
+    return nextLarger;
 }
 
 TreeNode<int>* takeInputLevelWise() {
