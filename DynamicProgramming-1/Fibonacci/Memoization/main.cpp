@@ -22,18 +22,21 @@ int fibHelper(int *ans, int n) {
     return ans[n];
 }
 
-int fibo2(int n) {
+int fib(int n) {
     int *ans {new int[n + 1]};
     memset(ans, -1, (n + 1) * sizeof(int));
 
-    return fibHelper(ans, n);
+    int result {fibHelper(ans, n)};
+
+    delete [] ans;
+    return result;
 }
 
 int main() {
     int n;
     cin >> n;
 
-    cout << fibo2(n) << endl;
+    cout << fib(n) << endl;
 
     return 0;
 }
