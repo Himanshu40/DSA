@@ -95,7 +95,6 @@ pair<Node<int> *, Node<int> *> constructLinkedListHelper(BinaryTreeNode<int> *ro
         answer.second = rootRight.second;
     }
 
-
     return answer;
 }
 
