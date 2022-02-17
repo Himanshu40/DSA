@@ -1,3 +1,5 @@
+// To calculate the factorial of a number
+
 #include <iostream>
 
 unsigned int factorial(unsigned int n) {
