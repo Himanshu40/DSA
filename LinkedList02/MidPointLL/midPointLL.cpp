@@ -1,3 +1,5 @@
+// pls add return type as it is non void function in midpoint function
+
 #include <iostream>
 
 using namespace std;
